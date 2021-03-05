@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec babel-node app.js",
     "build": "babel -d ./build ./src",
-    "start": "node app.js",
+    "start": "node ./build/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -26,6 +26,7 @@
     "nodemon": "^2.0.7"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.0",
     "@babel/core": "^7.13.8",
     "@babel/node": "^7.13.0",
     "@babel/preset-env": "^7.13.9"
