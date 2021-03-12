@@ -1,9 +1,19 @@
-const User = require('../models/user.model');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import User from "../models/user.model";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import userSchemaValidation from "../middlewares/validators/user.validation";
 
 const EXPIRE_IN_ONE_DAY = process.env.EXPIREINHOUR * 24;
 
+exports.getAll = (req, res) => {
+    User.find()
+    .then((data)=> {
+        res.send(data);
+    })
+    .catch((err)=> {
+        console.log(err);
+    });
+}
 exports.register = (req, res) => {
 
     let hashedPassword = bcrypt.hashSync(req.body.password, 10);
@@ -17,6 +27,12 @@ exports.register = (req, res) => {
         password: hashedPassword
     });
     
+    const validation = userSchemaValidation.validate(req.body);
+
+    console.log(validation);
+    if(validation.error) {
+        return res.status(400).send(validation.error);
+    }
     user.save()
         .then(data => {
             let userToken = jwt.sign(
