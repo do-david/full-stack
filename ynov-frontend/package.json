@@ -13,8 +13,21 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "@apollo/client": "^3.3.11",
+    "@apollo/react-hooks": "^4.0.0",
+    "@sendgrid/mail": "^7.4.2",
+    "apollo-boost": "^0.4.9",
+    "apollo-link-ws": "^1.0.20",
     "autoprefixer": "^10.2.4",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.11.0",
+    "http-proxy-middleware": "^1.0.6",
     "postcss": "^8.2.7",
+    "subscriptions-transport-ws": "^0.9.18",
     "tailwindcss": "^2.0.3"
   }
 }

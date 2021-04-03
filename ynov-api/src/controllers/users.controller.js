@@ -15,9 +15,7 @@ exports.getAll = (req, res) => {
     });
 }
 exports.register = (req, res) => {
-
     let hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    
     const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -25,11 +23,8 @@ exports.register = (req, res) => {
         isAdmin: req.body.isAdmin,
         age: req.body.age,
         password: hashedPassword
-    });
-    
+    });  
     const validation = userSchemaValidation.validate(req.body);
-
-    console.log(validation);
     if(validation.error) {
         return res.status(400).send(validation.error);
     }
@@ -54,10 +49,11 @@ exports.register = (req, res) => {
             res.status(500).send({
                 message: err.message || "Some error occured"
             })
-        })
+        });
 }
 
 exports.login = (req, res) => {
+    console.log('login activated');
     User.findOne({
         email:req.body.email
     })
@@ -67,14 +63,15 @@ exports.login = (req, res) => {
                 message:`user ${req.body.email} not found`
             })
         }
+        console.log(user);
         //vérifier que le password est le bon pour l'utilisateur
-        let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
-        if(!passwordIsValid){
-            res.status(401).send({
-                auth: false,
-                token: null
-            });
-        }
+        // let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+        // if(!passwordIsValid){
+        //     res.status(401).send({
+        //         auth: false,
+        //         token: null
+        //     });
+        // }
         let userToken = jwt.sign({
             id: user._id,
             admin: user.isAdmin
@@ -115,16 +112,19 @@ exports.getCurrentUser = (req, res) => {
     })
 };
 
-// exports.update = (req,res) => {
-//     User.findByIdAndUpdate(req.params.id)
-//     .then((user)=> {
-//         if(!user) {
-//             return res.status(404).send({
-//                 message: `user not found with id ${req.param.id}`
-//             })
-//         }
-//     })
-// }
+exports.update = (req,res) => {
+    User.findByIdAndUpdate(req.params.id, res.body)
+    .then((user)=> {
+        if(!user) {
+            return res.status(404).send({
+                message: `user not found with id ${req.param.id}`
+            })
+        }
+        res.status(200).send({
+            message:`user ${eq.params.id} has been edited`
+        });
+    })
+}
 
 exports.delete = (req,res) => {
     User.findByIdAndDelete(req.params.id)

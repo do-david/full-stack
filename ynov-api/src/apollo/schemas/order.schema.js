@@ -1,11 +1,17 @@
 import {gql} from "apollo-server-express";
 
 module.exports = gql`
+    enum Status {
+        PENDING,
+        DELIVERED,
+        FINISHED
+    }
     type Order {
         id: ID!
         totalAmount: Float
         user: User
-        products: [Product]
+        products: [Product],
+        status: Status
     }
     input OrderInput {
         totalAmount: Float,
@@ -17,7 +23,7 @@ module.exports = gql`
         order(id:ID!): Order
     }
     extend type Mutation {
-        makeOrder(totalAmount: Float, user: ID!, products: [ID!]): Order
-        #makeOrder(input:OrderInput): Order
+        #makeOrder(totalAmount: Float, user: ID!, products: [ID!]): Order
+        makeOrder(input:OrderInput): Order
     }
 `

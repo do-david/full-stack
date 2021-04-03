@@ -1,6 +1,4 @@
-//const Product = require('../../models/product.model');
 import Product from "../../models/product.model";
-//resolver équivalent au controller c'est ici qu'on met la logique
 
 module.exports = {
     Query: {

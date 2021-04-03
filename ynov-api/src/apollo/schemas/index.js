@@ -1,5 +1,3 @@
-//const { gql } = require('apollo-server-express');
-//const productSchema = require('./product.schema.js');
 import {gql} from "apollo-server-express";
 import productSchema from "./product.schema";
 import userSchema from "./user.schema";
