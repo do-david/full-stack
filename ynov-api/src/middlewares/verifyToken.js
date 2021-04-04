@@ -2,7 +2,7 @@
 import jwt from "jsonwebtoken";
 
 function verifyToken(req, res, next) {
-    token = req.headers.authorization;
+    let token = req.headers.authorization;
     if(!token){
         res.status(403).send({
             auth: false,

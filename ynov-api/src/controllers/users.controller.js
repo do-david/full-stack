@@ -53,7 +53,6 @@ exports.register = (req, res) => {
 }
 
 exports.login = (req, res) => {
-    console.log('login activated');
     User.findOne({
         email:req.body.email
     })
@@ -63,7 +62,6 @@ exports.login = (req, res) => {
                 message:`user ${req.body.email} not found`
             })
         }
-        console.log(user);
         //vérifier que le password est le bon pour l'utilisateur
         // let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
         // if(!passwordIsValid){
@@ -98,6 +96,7 @@ exports.logout = (req, res) => {
 };
 
 exports.getCurrentUser = (req, res) => {
+    console.log("get user :",req);
     User.findById(req.params.id)
     .then((user)=> {
         if(!user) {
