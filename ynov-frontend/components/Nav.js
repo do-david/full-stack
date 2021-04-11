@@ -1,7 +1,16 @@
-import navStyles from '../styles/Nav.module.css';
-import Link from 'next/link';
+import React from 'react'
+import navStyles from '../styles/Nav.module.css'
+import Link from 'next/link'
+import { auth_toggle } from '../actions/authentification'
+import { useSelector, useDispatch } from 'react-redux'
+import Button from './Button'
 
 const Nav = () => {
+    const dispatch = useDispatch()
+    const isAuth = useSelector(state=>state.toggleAuthentification.isAuthenticated)
+    const handleLogout = () => {
+        dispatch(auth_toggle())
+    }
     return(
         <nav className={navStyles.nav}>
             <div>
@@ -16,20 +25,27 @@ const Nav = () => {
                         <Link href='/about'>About</Link>
                     </li>
                     <li>
-                        <Link href='/account'>Account</Link>
-                    </li>
-                    <li>
                         <Link href='/contact'>Contact</Link>
                     </li>
+                    {isAuth ? 
+                        <li>
+                            <Link href='/account'>Account</Link>
+                        </li>
+                        : null 
+                    }
                 </ul>
             </div>
             <ul>
+                {isAuth ?
+                <li>
+                    <Link href='/login' passHref><Button label='Logout' onClick={handleLogout}/></Link>
+                </li> 
+                : 
                 <li>
                     <Link href='/login'>Login</Link>
-                </li>
+                </li>}
             </ul>
         </nav>
     )
 }
-
 export default Nav

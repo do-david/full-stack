@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/router'
 import Title from '../components/Title';
 import Link from 'next/link';
+import { useDispatch } from "react-redux";
+import { auth_toggle } from "../actions/authentification";
 
 function Login() {
+    const dispatch = useDispatch()
     const [formState,setFormState] = useState({email:'',password:''});
     const [errorMessage,setErrorMessage]=useState('');
     const router = useRouter();
@@ -25,6 +28,7 @@ function Login() {
             else {
                 let token = data.token;
                 localStorage.setItem('token',token);
+                dispatch(auth_toggle());
                 router.push("/account");
             }
         })
