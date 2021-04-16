@@ -1,8 +1,0 @@
-query Products {
-    products{
-        id,
-        title,
-        price,
-        description
-    }
-}
