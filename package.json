@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "homepage": "https://full-stack1.herokuapp.com/",
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/app.js",
     "build": "babel -d ./build ./src",
