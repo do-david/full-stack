@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 app.use('/api/v1', apiRouter);
 
 exports.start = () => {
-  app.listen(process.env.PORT || 3000, function(){
+  app.listen(port || 3000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
 };
