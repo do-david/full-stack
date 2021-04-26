@@ -1,7 +1,7 @@
-const userRouter = require('./users.route');
-const orderRouter = require('./orders.route');
-const productRouter = require('./products.route');
-const express = require('express');
+import userRouter from './users.route';
+import orderRouter from './orders.route';
+import productRouter from './products.route';
+import express from 'express';
 const router = express.Router();
 
 router.use(userRouter);
